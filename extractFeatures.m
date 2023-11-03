@@ -9,13 +9,15 @@ function [feature_table] = extractFeatures(dataChTimeTr,includedFeatures, Fs)
         switch includedFeatures{f}
             case 'var'
                 fvalues = squeeze(var(dataChTimeTr,0,2))';
-            case 'stdv'
-                fvalues = squeeze(std(dataChTimeTr,0, 2))';
+            case 'std'
+                fvalues = squeeze(std(dataChTimeTr, 0, 2))';
+            case 'rms'
+                fvalues = squeeze(sqrt(mean(dataChTimeTr.^2, 2)))';
+            case 'mav'
+                fvalues = squeeze(mean(abs(dataChTimeTr), 2))';
             otherwise
-                % If you don't recognize the feature name in the cases
-                % above
-                disp(strcat('unknown feature: ', includedFeatures{f}, ...
-                    ', skipping....'))
+                disp(strcat('Unknown feature: ', includedFeatures{f}, ...
+                     ', skipping....'))
                 break
         end
 
@@ -35,15 +37,14 @@ function [feature_table] = extractFeatures(dataChTimeTr,includedFeatures, Fs)
             %Put data into a table with the feature name and channel number
             for  ch = includedChannels
                 feature_table = [feature_table table(fvalues(:,ch),...
-                    'VariableNames',string(strcat(includedFeatures{f}, '_' ,'Ch',num2str(ch))))]; %#ok<AGROW>
+                    'VariableNames',string(strcat(includedFeatures{f}, '_' ,'Ch',num2str(ch))))];
             end
-        
         
         else
         % Otherwise, loop through each one and give a number name 
             for  v = 1:size(fvalues,2)
                 feature_table = [feature_table table(fvalues(:,v),...
-                    'VariableNames',string(strcat(includedFeatures{f}, '_' ,'val',num2str(v))))]; %#ok<AGROW>
+                    'VariableNames',string(strcat(includedFeatures{f}, '_' ,'val',num2str(v))))];
             end
         end
     end

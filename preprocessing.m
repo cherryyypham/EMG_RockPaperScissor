@@ -1,4 +1,5 @@
 function [dataChTimeTr, labels] = preprocessing(finaldataset, finaldataset_size)
+    addpath('/home/kpham/kpham/olin/neuro/EMG_RockPaperScissor/helpers');
     % Initilize variables
     dataChTimeTr = [];
     labels = [];
