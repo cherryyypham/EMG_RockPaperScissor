@@ -9,7 +9,7 @@ function res = runMatlabModel(data)
 
     % Filter the data
     for ch = 1:numCh
-        filt_data(:,ch) = highpass((:,1+ch), 0 ,1000);
+        filt_data(:,ch) = highpass(data(:,1+ch), 5,1000);
     end
     
     includedFeatures = {'var','std', 'rms', 'mav'};

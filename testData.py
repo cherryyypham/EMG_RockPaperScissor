@@ -128,10 +128,11 @@ if __name__=='__main__':
             print('Shoot!')
             time.sleep(1.6)
             data = wrapper.get_data_from(tstamp_start)
-            print(np.shape(data[0:1400,:]))
+            # print(np.shape(data[0:1400,:]))
             inference = runModel(data[0:1400,:])
             
             inferred_out.push_sample([inference])
             print(f'Inference: {inference}')
         elif marker==99:
             sys.exit(0)
+quit
