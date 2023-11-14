@@ -15,7 +15,6 @@ function [X_train, y_train, X_test, y_test] = featuresTo_X_y_train_test(filesToL
         X_train = feature_table(:,selected_features);
         y_train = labels;
     
-    
         % If you just want to use your train data again (resubstitution), just
         % get rid of the load part and repeat the step above.
     
@@ -51,7 +50,7 @@ function [X_train, y_train, X_test, y_test] = featuresTo_X_y_train_test(filesToL
         X_train = feature_table(training(cvtt),selected_features);
         y_train = labels(training(cvtt));
     
-        %Test datac
+        %Test data
         X_test = feature_table(test(cvtt),selected_features);
         y_test = labels(test(cvtt));
     end
